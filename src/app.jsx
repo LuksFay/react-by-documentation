@@ -1,44 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class Clock extends React.Component{
-  constructor(props){
+
+class Toggle extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {date:new Date()};
+    this.state = {isToggleOn: true};
+
+    // Este enlace es necesario para hacer que `this` funcione en el callback
+    this.handleClick = this.handleClick.bind(this);
   }
-  
-  componentDidMount(){
-    this.timerID = setInterval(
-      ()=> this.tick(),1000
-    );
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
   }
-  
-  componentWillUnmount(){
-    clearInterval(this.timerID);
-  }
-  
-  tick(){
-    this.setState({
-      date: new Date()
-    });
-  }
-  
-  render(){
-    return(
-        <div>
-      <h1>Hello, World!</h1>
-      <h2> It is: {this.state.date.toLocaleTimeString()}.
-      </h2>
-    </div>
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
     );
   }
 }
 
-class App extends React.Component {	
-  render() {
-    return (
-     <Clock />
-    )
-  }
-}
-  ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Toggle />,
+  document.getElementById('root')
+);
