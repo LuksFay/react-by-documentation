@@ -16,7 +16,7 @@ function UserGreeting(props){
   return <h1>Welcome Back! 🤩</h1>;
 } 
 function GuestGreeting(props){
-  return <h1>Please, sing up 🙏🏼</h1>;
+  return <h1>Please, sing up 🙏🏼 probando git</h1>;
 }
 
 function LoginButton(props){
